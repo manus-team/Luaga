@@ -1,0 +1,6 @@
+#! /bin/sh
+echo "Updating software"
+git pull origin master
+
+echo "Starting multicast listener"
+python camera_module_listen.py
