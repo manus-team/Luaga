@@ -1,4 +1,8 @@
 #! /bin/sh
+
+# Change working directory to script directory.
+dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
 echo "Pulling latest software from scanner."
 git pull origin master
 
