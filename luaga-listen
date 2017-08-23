@@ -3,4 +3,4 @@ echo "Pulling latest software from scanner."
 git pull origin master
 
 echo "Starting multicast listener."
-python camera_module_listen.py
+python3 camera_module_listen.py
