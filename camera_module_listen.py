@@ -4,6 +4,7 @@ import socket
 import struct
 import picamera
 import os.path
+import time
 from operator import truediv
 
 MCAST_GRP = '224.1.1.1'
@@ -18,25 +19,26 @@ if __name__ == '__main__':
 	mreq = struct.pack("4sl", socket.inet_aton(MCAST_GRP), socket.INADDR_ANY)
 
 	sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+	
+	camera = picamera.PiCamera()
+	
+	camera.resolution = (3280,2464)   # The full 8MP resolution causes problems unless the pi’s GPU is allocated more memory…
+	#camera.resolution = (2592,1944)  # …in which case the lower 5MP resolution is required.
+	camera.sensor_mode = 2
+	camera.framerate = 15
+	camera.exposure_mode = 'off'
+	camera.awb_mode = 'off'
 
+	camera.iso = int(200)
+
+	camera.shutter_speed = int(14000)
+	camera.awb_gains = (truediv(int(18),10),truediv(int(14),10))
+	camera.drc_strength = 'off'
+	
 	while True:
 		command = sock.recv(1024)
 		if command == b'capture':
 			print("Capturing image")
-			camera = picamera.PiCamera()
-			camera.resolution = (3280,2464)   # The full 8MP resolution causes problems unless the pi’s GPU is allocated more memory…
-			#camera.resolution = (2592,1944)  # …in which case the lower 5MP resolution is required.
-			#camera.sensor_mode = 2
-			#camera.framerate = 15
-			#camera.exposure_mode = 'off'
-			#camera.awb_mode = 'off'
-		
-			#camera.iso = int(200)
-			#camera.shutter_speed = int(14000)
-			#camera.awb_mode = 'off'
-			#camera.awb_gains = (truediv(int(18),10),truediv(int(14),10))
-			#camera.drc_strength = 'off'
-		
+			
 			camera.capture(os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname()), format='jpeg', quality=int(100))
 			print("Saved image to ", os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname()))
-			camera.close()
