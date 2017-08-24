@@ -1,0 +1,10 @@
+[Unit]
+Description=Luaga Scanner Multicast Listener
+
+[Service]
+Type=simple
+ExecStart=/home/pi/luaga/luaga-listen
+User=pi
+
+[Install]
+WantedBy=multi-user.target
