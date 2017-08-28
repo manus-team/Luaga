@@ -39,6 +39,12 @@ To get the systemd status report for luaga-listen on all of the scanners, run th
 
     ansible scanners -a "systemctl status luaga-listen" -u pi --become -f 10
 
+### Shutting down the Scanner
+
+To shutdown the Scanner run this command on the 3 and then shutdown itself:
+
+ansible scanners -a "shutdown" -u pi --become -f 10 
+
 
 ## Known Issues
 
