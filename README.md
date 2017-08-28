@@ -3,6 +3,11 @@
 This project contains the software necessary for both the controlling pi
 and the scanning pis.
 
+## Undocumented:
+Which Python Version is used?
+Which file is doing what and why?
+Where are the files loacted and is there location in the $PATH variable?
+
 ## Hardware+Software Setup
 
 One Raspberry Pi 3 B with an additional network card, creating a wifi network called luaga. 20 Raspberry Pi Zero Ws with camera modules set up on the scanner, each connected to the luaga network, with IP addresses 10.1.0.201-220, with DHCP-configured hostnames matching their IP address (i.e. luaga01). The 3 creates an NFS share to which the Zeros connect.
@@ -18,6 +23,10 @@ The Zeros should in theory run listen.py on startup, which listens on a multicas
 In practise the luaga-listen service doesn’t seem to start correctly on boot and has to be started manually via ansible on every boot, with this command:
 
     ansible scanners -m systemd -a "name=luaga-listen state=started" -u pi --become -f 10
+
+For a simple output use this command:
+
+    ansible scanners -m systemd -a "name=luaga-listen state=started" -u pi --become -f 10 | grep -B 3 started
 
 ### Updating the luaga code on all scanners
 
