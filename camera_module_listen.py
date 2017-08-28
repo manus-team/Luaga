@@ -11,6 +11,7 @@ MCAST_GRP = '224.1.1.1'
 MCAST_PORT = 5007
 
 DESTINATION_PATH = '/home/pi/scans/'
+TEMP_PATH = '/home/pi/'
 
 if __name__ == '__main__':
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
@@ -26,5 +27,6 @@ if __name__ == '__main__':
 			print("Capturing image")
 			
 			filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
-			subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', filename])
+			temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
+			subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename && cp temp_filename filename])
 			print("Saved image to", filename)
