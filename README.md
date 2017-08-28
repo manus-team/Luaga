@@ -5,7 +5,9 @@ and the scanning pis.
 
 ## Undocumented:
 Which Python Version is used?
+
 Which file is doing what and why?
+
 Where are the files loacted and is there location in the $PATH variable?
 
 ## Hardware+Software Setup
