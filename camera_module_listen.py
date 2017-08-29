@@ -26,11 +26,11 @@ if __name__ == '__main__':
 		if command == b'capture':
 			print("Capturing image")
 			
-			filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
+#			filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
 			temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
 			if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename]) == 0:
 				print("Saved image to", temp_filename)
-				if subprocess.call(['cp', temp_filename, filename]) == 0:
+				if subprocess.call(['rsync', '-avz', temp_filename, DESTINATION_PATH]) == 0:
 					print("Copied Image to", filename)
 				else:
 					print("copying failed")
