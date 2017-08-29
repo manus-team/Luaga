@@ -29,8 +29,10 @@ if __name__ == '__main__':
 			filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
 			temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
 			if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename]) == 0:
-			print("Saved image to", temp_filename)
-			if subprocess.call(['cp', temp_filename, filename]) == 0:
-				print("Copied Image to", filename)
+				print("Saved image to", temp_filename)
+				if subprocess.call(['cp', temp_filename, filename]) == 0:
+					print("Copied Image to", filename)
+				else:
+					print("copying failed")
 			else:
-				print("copying failed")
+				print("Photograpy failed")
