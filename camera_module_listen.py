@@ -28,5 +28,5 @@ if __name__ == '__main__':
 			
 			filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
 			temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
-			subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename, '&&', 'cp', temp_filename, filename])
+			subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename, '&&', 'cp', temp_filename, filename], shell=True)
 			print("Saved image to", filename)
