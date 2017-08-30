@@ -16,7 +16,9 @@ One Raspberry Pi 3 B with an additional network card, creating a wifi network ca
 
 The configuration on the Zeros is managed with Ansible (installed on the 3), and is currently done via ad-hoc commands which at some point should probably be written into playbooks for ease of use. There are three ansible groups configured, scanners, scanner1-10 and scanner11-20. The last two groups are for testing convenience.
 
-The Zeros should in theory run listen.py on startup, which listens on a multicast group and takes a photo into the scans folder, named with their hostname, every time the "capture" command is received.
+The Zeros should in theory run listen.py on startup, which listens on a multicast group and takes a photo into the scans folder, named with their hostname, every time the "capture" command is received. 
+
+Number 1 has an older Version of the image and a GUI-Installed for Camerafocus tests.
 
 ## Common tasks
 
@@ -60,9 +62,6 @@ ansible scanners -a "shutdown" -u pi --become -f 10
 
 
 ## Known Issues
-
-### Hardware
-Number 1 has an older Version of the image and a GUI-Installed for Camerafocus tests.
 
 ### Unknown NFS issue preventing disk IO for some zeros
 
