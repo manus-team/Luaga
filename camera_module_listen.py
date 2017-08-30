@@ -31,6 +31,8 @@ if __name__ == '__main__':
             try:
                 subprocess.check_call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename])
                 print("Saved image to", temp_filename)
+                print("Waiting 5 secs")
+                time.sleep(5)
                 subprocess.check_call(['rsync', '-avz', temp_filename, DESTINATION_PATH])
                 print("Copied Image to", filename)
             except subprocess.CalledProcessError:
