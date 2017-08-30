@@ -61,9 +61,8 @@ ansible scanners -a "shutdown" -u pi --become -f 10
 
 ## Known Issues
 
-### Some Zeros are not connected
-
-As of 2017-08-27, Zeros number 1 and 20 are not connected to the setup, so no images will be created, and ansible will return errors for them. Number 1 has an older Version of the image and a GUI-Installed for Camerafocus tests. 
+### Hardware
+Number 1 has an older Version of the image and a GUI-Installed for Camerafocus tests.
 
 ### Unknown NFS issue preventing disk IO for some zeros
 
