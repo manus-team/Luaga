@@ -27,11 +27,8 @@ if __name__ == '__main__':
             print("Capturing image")
 
             filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
-            temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
             try:
-                subprocess.check_call(['raspistill', '-t', '0', '-w', '3280', '-h', '2464', '-o', temp_filename])
-                print("Saved image to", temp_filename)
-                subprocess.check_call(['rsync', '-avz', temp_filename, DESTINATION_PATH])
-                print("Copied Image to", filename)
+                subprocess.check_call(['raspistill', '-t', '0', '-w', '3280', '-h', '2464', '-o', filename])
+                print("Saved image to", filename)
             except subprocess.CalledProcessError:
                 print("Photograpy failed")
