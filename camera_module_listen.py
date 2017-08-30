@@ -29,10 +29,8 @@ if __name__ == '__main__':
             filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
             temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
             try:
-                subprocess.check_call(['raspistill', '-w', '3280', '-h', '2464', '-o', temp_filename])
+                subprocess.check_call(['raspistill', '-t', '0', '-w', '3280', '-h', '2464', '-o', temp_filename])
                 print("Saved image to", temp_filename)
-                print("Waiting 10 secs")
-                time.sleep(10)
                 subprocess.check_call(['rsync', '-avz', temp_filename, DESTINATION_PATH])
                 print("Copied Image to", filename)
             except subprocess.CalledProcessError:
