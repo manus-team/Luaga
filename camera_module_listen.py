@@ -5,6 +5,7 @@ import struct
 import os.path
 import time
 import subprocess
+import shutil
 from operator import truediv
 
 MCAST_GRP = '224.1.1.1'
@@ -26,7 +27,7 @@ if __name__ == '__main__':
         if command == b'capture':
             print("Capturing image")
 
-            filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
+#            filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
             temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
 #            camera_options=['-w', '3280',  #width 
 #                     '-h', '2464',  #height
@@ -38,13 +39,11 @@ if __name__ == '__main__':
 #                     '-q', '100',   #jpeg quality
 #                     '-o', temp_filename    #output path
 #                    ]
-            subprocess.call(['touch', filename])
+
+#            subprocess.call(['touch', filename])
             if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
-                time.sleep(15)
-                if subprocess.call(['rsync', '-avz', '--temp-dir=/home/pi/', temp_filename, DESTINATION_PATH]) == 0:
-                    print("Copied Image to", filename)
-                else:
-                    print("copying failed")
+                shutil.copy(temp_filename, DESTINATION_PATH)
+                print("Copied Image to", DESTINATION_PATH)
             else:
                 print("Photograpy failed")
