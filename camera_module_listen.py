@@ -38,7 +38,7 @@ if __name__ == '__main__':
 #                     '-q', '100',   #jpeg quality
 #                     '-o', temp_filename    #output path
 #                    ]
-            if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '0', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
+            if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
                 if subprocess.call(['rsync', '-avz', '--temp-dir=/home/pi/', temp_filename, DESTINATION_PATH]) == 0:
                     print("Copied Image to", filename)
