@@ -1,5 +1,3 @@
-  GNU nano 2.2.6                                            File: luaga/camera_module_listen.py                                                                                      Modified  
-
 # coding: utf-8
 
 import socket
