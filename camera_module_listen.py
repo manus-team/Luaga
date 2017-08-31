@@ -28,17 +28,17 @@ if __name__ == '__main__':
 
             filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
             temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
-            camera_options=['-w', '3280',  #width 
-                     '-h', '2464',  #height
-                     '-t', '0',     #no waiting befor photo
-                     '-n',          #no preview
-                     '-sh', '30',   #sharpness correction
-                     '-co', '30',   #contrast correction
-                     'ISO', '100',  #ISO Setting
-                     '-q', '100',   #jpeg quality
-                     '-o', temp_filename    #output path
-                    ]
-            if subprocess.call(['raspistill', camera_options]) == 0:
+#            camera_options=['-w', '3280',  #width 
+#                     '-h', '2464',  #height
+#                     '-t', '0',     #no waiting befor photo
+#                     '-n',          #no preview
+#                     '-sh', '30',   #sharpness correction
+#                     '-co', '30',   #contrast correction
+#                     'ISO', '100',  #ISO Setting
+#                     '-q', '100',   #jpeg quality
+#                     '-o', temp_filename    #output path
+#                    ]
+            if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '0', '-n', '-sh', '30', '-co', '30', 'ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
                 if subprocess.call(['rsync', '-avz', '--temp-dir=/home/pi/', temp_filename, DESTINATION_PATH]) == 0:
                     print("Copied Image to", filename)
