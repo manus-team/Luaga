@@ -43,7 +43,12 @@ if __name__ == '__main__':
 #            subprocess.call(['touch', filename])
             if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
-                shutil.copy(temp_filename, DESTINATION_PATH)
-                print("Copied Image to", DESTINATION_PATH)
+                while True:
+                    try:
+                        shutil.copy(temp_filename, DESTINATION_PATH)
+                        print("Copied Image to", DESTINATION_PATH)
+                        break
+                    except OSError:
+                        print("Copying failed, trying again ...")                    
             else:
                 print("Photograpy failed")
