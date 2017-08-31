@@ -38,7 +38,7 @@ if __name__ == '__main__':
 #                     '-q', '100',   #jpeg quality
 #                     '-o', temp_filename    #output path
 #                    ]
-            subprocess.call('touch', filename)
+            subprocess.call(['touch', filename])
             if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
                 time.sleep(15)
