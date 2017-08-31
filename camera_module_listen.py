@@ -1,3 +1,5 @@
+  GNU nano 2.2.6                                            File: luaga/camera_module_listen.py                                                                                      Modified  
+
 # coding: utf-8
 
 import socket
@@ -27,20 +29,9 @@ if __name__ == '__main__':
         if command == b'capture':
             print("Capturing image")
 
-#            filename = os.path.join(DESTINATION_PATH, "%s.jpg" % socket.gethostname())
+            error_filename = os.path.join(DESTINATION_PATH, "%s.error" % socket.gethostname())
             temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
-#            camera_options=['-w', '3280',  #width 
-#                     '-h', '2464',  #height
-#                     '-t', '0',     #no waiting befor photo
-#                     '-n',          #no preview
-#                     '-sh', '30',   #sharpness correction
-#                     '-co', '30',   #contrast correction
-#                     'ISO', '100',  #ISO Setting
-#                     '-q', '100',   #jpeg quality
-#                     '-o', temp_filename    #output path
-#                    ]
 
-#            subprocess.call(['touch', filename])
             if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '30', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
                 while True:
@@ -49,6 +40,7 @@ if __name__ == '__main__':
                         print("Copied Image to", DESTINATION_PATH)
                         break
                     except OSError:
-                        print("Copying failed, trying again ...")                    
+                        print("Copying failed, trying again ...")
             else:
+                subprocess.call(['touch', error_filename])
                 print("Photograpy failed")
