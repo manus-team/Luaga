@@ -37,7 +37,7 @@ if __name__ == '__main__':
                         shutil.copy(temp_filename, DESTINATION_PATH)
                         print("Copied Image to", DESTINATION_PATH)
                         break
-                    except OSError:
+                    except Error:
                         print("Copying failed, trying again ...")
             else:
                 subprocess.call(['touch', error_filename])
