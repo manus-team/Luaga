@@ -10,7 +10,7 @@ change the autofit parameter to the size you like
 ### On the Zero
 Log in from the 3 with -X as parameter for ssh
 
-    ssh -X pi@10.1.0.20<n>
+    ssh -X pi@10.1.0.201
     raspivid -t 0 -o - | nc 10.1.0.1 5001
 
 You can change the IP to any device in the net. 
