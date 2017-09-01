@@ -1,4 +1,4 @@
-## For streaming the camera to the 3
+## For streaming the Pi-Camera from Zero<n> to the 3
 ### On the 3
 run
 nc -l -p 5001 | DISPLAY=:0 mpv -fps 31 -cache 1024 --autofit=786 -
