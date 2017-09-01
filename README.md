@@ -63,6 +63,9 @@ ansible scanners -a "shutdown" -u pi --become -f 10
 
 ## Known Issues
 
+### No pictures is taken
+Sometimes raspistill seems to not be able to take a picture. Reason unknown, debugging necessary.
+
 ### Weird image problems
 
 Occasionally, blocks of pixels in some images seem to get mixed up and the images come out weird.
