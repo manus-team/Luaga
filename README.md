@@ -63,12 +63,6 @@ ansible scanners -a "shutdown" -u pi --become -f 10
 
 ## Known Issues
 
-### Unknown NFS issue preventing disk IO for some zeros
-
-Often, one or two zeros per scan will be unreliably unable to create files or perform any other IO in the scans folder, either preventing them from being able to create an image file there at all, or only leaving the luagaXX.jpg~ placeholder file, and not the complete one.
-
-* We tested removing 10 pis from the system and capturing, and the issue still occurred, so it doesn’t look like it’s a network issue.
-
 ### Weird image problems
 
 Occasionally, blocks of pixels in some images seem to get mixed up and the images come out weird.
