@@ -1,10 +1,10 @@
 ## For streaming the camera to the 3
-# On the 3
+### On the 3
 run
-  nc -l -p 5001 | DISPLAY=:0 mpv -fps 31 -cache 1024 --autofit=786 -
+nc -l -p 5001 | DISPLAY=:0 mpv -fps 31 -cache 1024 --autofit=786 -
 change the autofit parameter to the size you like
 
-#On the Zero Number <n>
+### On the Zero Number <n>
 Log in from the 3 with -X as parameter for ssh
   ssh -X pi@10.1.0.20<n>
   raspivid -t 0 -o - | nc 10.1.0.1 5001
