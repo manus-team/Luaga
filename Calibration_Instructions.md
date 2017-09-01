@@ -15,4 +15,4 @@ Log in from the 3 with -X as parameter for ssh
 
 You can change the IP to any device in the net. 
 
-Make sure that the receiver is up on the 3 before you start the stream on the Zero!
+Make sure that the receiver is up on the 3 or the receiver device before you start the stream on the Zero!
