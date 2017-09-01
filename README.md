@@ -69,10 +69,6 @@ Often, one or two zeros per scan will be unreliably unable to create files or pe
 
 * We tested removing 10 pis from the system and capturing, and the issue still occurred, so it doesn’t look like it’s a network issue.
 
-### luaga-listen service not starting automatically on boot
-
-It is definitely enabled, but it seems like when it runs on boot, it doesn’t get run in the correct directory, or from the correct user, for some reason. Starting it any time after boot results in it starting fine.
-
 ### Weird image problems
 
 Occasionally, blocks of pixels in some images seem to get mixed up and the images come out weird.
