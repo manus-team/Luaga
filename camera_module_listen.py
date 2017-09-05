@@ -1,4 +1,4 @@
-# coding: utf-8
+Commit# coding: utf-8
 
 import socket
 import struct
@@ -34,17 +34,17 @@ if __name__ == '__main__':
                                 '-w', '3280',
                                 '-h', '2464',
                                 '-t', '1',
-#                                '-n',
-#                                '-ex', 'off',
-#                                '-awb', 'off',
-#                                '-ifx', 'none',
-#                                '-ss', '50000',
-#                                '-awbg', '1.1,2.8',
-#                                '-q', '100',
-#                                '-drc', 'off',
-#                                '-sh', '10',
-#                                '-co', '30',
-#                                '-br', '55',
+                                '-n',
+                                '-ex', 'off',
+                                '-awb', 'off',
+                                '-ifx', 'none',
+                                '-ss', '2000000',
+                                '-awbg', '1.1,2.3',
+                                '-q', '100',
+                                '-drc', 'off',
+                                '-sh', '10',
+                                '-co', '30',
+                                '-br', '55',
                                 '-o', temp_filename]) == 0:
                                                                                                                                                                                                 -sh 10 -co 30 -br 55 -o
                 print("Saved image to", temp_filename)
