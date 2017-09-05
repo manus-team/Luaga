@@ -30,7 +30,7 @@ if __name__ == '__main__':
             error_filename = os.path.join(DESTINATION_PATH, "%s.error" % socket.gethostname())
             temp_filename = os.path.join(TEMP_PATH, "%s.jpg" % socket.gethostname())
 
-            if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-sh', '30', '-co', '15', '-br', '20', '-ISO', '100', '-q', '100', '-o', temp_filename]) == 0:
+            if subprocess.call(['raspistill', '-w', '3280', '-h', '2464', '-t', '1', '-n', '-o', temp_filename]) == 0:
                 print("Saved image to", temp_filename)
                 while True:
                     try:
