@@ -41,13 +41,6 @@ if __name__ == '__main__':
                                 '-drc', 'off',
                                 '-co', '15',
                                 '-o', temp_filename]) == 0:
-
-#                                '-ex', 'off',
-#                                '-ISO', '400',
-#                                '-br', '55',
-#                                '-sh', '10',
-#                                '-ifx', 'none',
-#                                '-ss', '2000000',
                                                                                                                                                                                                 -sh 10 -co 30 -br 55 -o
                 print("Saved image to", temp_filename)
                 while True:
