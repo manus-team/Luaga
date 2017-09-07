@@ -35,18 +35,19 @@ if __name__ == '__main__':
                                 '-h', '2464',
                                 '-t', '1',
                                 '-n',
-#                                '-ex', 'off',
                                 '-awb', 'off',
-#                                '-ifx', 'none',
- #                               '-ss', '2000000',
                                 '-awbg', '1.1,2.3',
                                 '-q', '100',
                                 '-drc', 'off',
-  #                              '-sh', '10',
                                 '-co', '15',
-#                                '-br', '55',
-#                                '-ISO', '400',
                                 '-o', temp_filename]) == 0:
+
+#                                '-ex', 'off',
+#                                '-ISO', '400',
+#                                '-br', '55',
+#                                '-sh', '10',
+#                                '-ifx', 'none',
+#                                '-ss', '2000000',
                                                                                                                                                                                                 -sh 10 -co 30 -br 55 -o
                 print("Saved image to", temp_filename)
                 while True:
