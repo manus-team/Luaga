@@ -41,11 +41,11 @@ if __name__ == '__main__':
 #                                '-q', '100',
 #                                '-drc', 'off',
 #                                '-co', '15',
-#                                '-o']
+#                                '-o', temp_filename]
             
-            camera_options = ['raspistill', '-o']
+            camera_options = ['raspistill', '-o', temp_filename]
             
-            if subprocess.call(camera_options, temp_filename]) == 0:
+            if subprocess.call(camera_options) == 0:
                 
                 print("Saved image to", temp_filename)
                 while True:
