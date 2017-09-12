@@ -57,6 +57,7 @@ if __name__ == '__main__':
                     except:
                         print "Unexpected error:", sys.exc_info()[0]
                         print("Copying failed, trying again ...")
+                        time.sleep(0.5)
             else:
                 while True:
                     try:
@@ -66,3 +67,4 @@ if __name__ == '__main__':
                     except :
                         print("Unexpected error:", sys.exc_info()[0])
                         print("touching failed, trying again ...")
+                        time.sleep(0.5)
