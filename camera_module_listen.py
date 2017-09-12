@@ -55,7 +55,7 @@ if __name__ == '__main__':
                         print("Copied Image to", DESTINATION_PATH)
                         break
                     except:
-                        print "Unexpected error:", sys.exc_info()[0]
+                        print("Unexpected error:", sys.exc_info()[0])
                         print("Copying failed, trying again ...")
                         time.sleep(0.5)
             else:
