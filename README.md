@@ -5,6 +5,7 @@ and the scanning pis.
 
 ## Undocumented:
 Which Python Version is used?
+    Something like Python 3 I guess
 
 Which file is doing what and why?
 
