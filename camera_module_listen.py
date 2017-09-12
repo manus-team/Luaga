@@ -54,7 +54,14 @@ if __name__ == '__main__':
                         print("Copied Image to", DESTINATION_PATH)
                         break
                     except:
+                        print "Unexpected error:", sys.exc_info()[0]
                         print("Copying failed, trying again ...")
             else:
-                subprocess.call(['touch', error_filename])
-                print("Photograpy failed")
+                while True:
+                    try:
+                        subprocess.call(['touch', error_filename])
+                        print("Photograpy failed")
+                        break
+                    except :
+                        print("Unexpected error:", sys.exc_info()[0])
+                        print("touching failed, trying again ...")
