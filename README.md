@@ -13,7 +13,7 @@ Where are the files loacted and is there location in the $PATH variable?
 
 ## Hardware+Software Setup
 
-One Raspberry Pi 3 B with an additional network card, creating a wifi network called luaga. 20 Raspberry Pi Zero Ws with camera modules set up on the scanner, each connected to the luaga network, with IP addresses 10.1.0.201-220, with DHCP-configured hostnames matching their IP address (i.e. luaga01). The 3 creates an NFS share to which the Zeros connect.
+One Raspberry Pi 3 B with an additional network card, creating a wifi network called luaga. Several Raspberry Pi Zero Ws with camera modules set up on the scanner, each connected to the luaga network, with IP addresses 10.1.0.201-2XX, with DHCP-configured hostnames matching their IP address (i.e. luaga01). The 3 creates an NFS share to which the Zeros connect.
 
 The configuration on the Zeros is managed with Ansible (installed on the 3), and is currently done via ad-hoc commands which at some point should probably be written into playbooks for ease of use. There are three ansible groups configured, scanners, scanner1-10 and scanner11-20. The last two groups are for testing convenience.
 
