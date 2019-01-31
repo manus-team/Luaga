@@ -9,15 +9,27 @@ Which Python Version is used?
 
 Which file is doing what and why?
 
+
 Where are the files loacted and is there location in the $PATH variable?
+on the 3:
+ansible_log
+dnsmasq.leases
+cameratest.py
+camStream.sh
+
+Pictures are getting first saved in home on the Zeros first and then get transported (by what or whom) to the /scans folder on the 3.
 
 Where? On the 3 there is a config file for dhcp where all mac addresses and there associated IP-Adresses are listed.
 
-On the 3 there is dnsmasq as a dhcp-server running ?? 
+On the 3 there is dnsmasq as a dhcp-server running ??  To check if it's running use systemctl status dnsmasq.service
+dnsmasq.conf
+zeros.conf 
+
 On the 3 there is a file /etc/network/interfaces where e.g. the broadcast Address defined.
 
-The scanner.sh is a Bashscript by Noah. It allows to check the connections of the Zeros to the Pi3, to scan and to shutdown the Zeros and the Pi3. Contr+C to stop this Program is disabled. 
+The scanner.sh is a Bashscript on the 3 (written by Noah). It allows to check the connections of the Zeros to the Pi3, to scan and to shutdown the Zeros and the Pi3. Contr+C to stop this Program is disabled. 
 
+To check which Pis are connected you can scan the wlanTele2-network (if you are in as well) with "nmap -sn 192.168.1.0/24 
 
 
 ## Hardware+Software Setup
