@@ -3,7 +3,8 @@
 This project contains the software necessary for both the controlling pi (a Raspberry 3)
 and the scanning pis (Raspberry Zeros).
 
-## Undocumented: 
+## Undocumented/to clean up
+
 Which Python Version is used?
 * As of 2019-01-31, python 3 and 2.7 are used inconsistently. python3 is used for the `camera_module_listen.py` script started by the luaga-listen service. The `send_multicast_capture_command.py` script fails with python3 but could probably easily be updated to work with it.
 
@@ -13,15 +14,7 @@ What do these files do?
 * cameratest.py: must be run on a system with a window system, opens a window with live camera output.
 * camStream.sh
 
-Pictures are getting first saved in home on the Zeros first and then get transported (by what or whom) to the /scans folder on the 3.
-
-Where? On the 3 there is a config file for dhcp where all mac addresses and there associated IP-Adresses are listed.
-
-On the 3 there is dnsmasq as a dhcp-server running ??  To check if it's running use systemctl status dnsmasq.service
-dnsmasq.conf
-zeros.conf 
-
-The scanner.sh is a Bashscript on the 3 (written by Noah). It allows to check the connections of the Zeros to the Pi3, to scan and to shutdown the Zeros and the Pi3. Contr+C to stop this Program is disabled. 
+The scanner.sh is a Bashscript on the 3 (written by Noah). It allows to check the connections of the Zeros to the Pi3, to scan and to shutdown the Zeros and the Pi3. Contr+C to stop this Program is disabled.
 
 To check which Pis are connected you can scan the wlanTele2-network (if you are in as well) with "nmap -sn 192.168.1.0/24 
 
@@ -41,13 +34,13 @@ The 3 creates an NFS share to which the Zeros connect, which is mounted at `/hom
 
 Several Raspberry Pi Zero Ws with camera modules set up on the scanner, each connected to the luaga network, with IP addresses 10.1.0.201-2XX, with DHCP-configured hostnames matching their IP address (i.e. luaga01).
 
+One Raspberry Pi 3 B with an additional network card, creating a wifi network called luaga. Several Raspberry Pi Zero Ws with camera modules set up on the scanner, each connected to the luaga network, with IP addresses 10.1.0.201-2XX, with DHCP-configured hostnames matching their IP address (i.e. luaga01). The 3 creates an NFS share to which the Zeros connect.
+
 The configuration on the Zeros is managed with Ansible (installed on the 3), and is currently done via ad-hoc commands which at some point should probably be written into playbooks for ease of use. There are three ansible groups configured, scanners, scanner1-10 and scanner11-20. The last two groups are for testing convenience.
 
 The scanner modules transfer captured photos (named after their DHCP-assigned hostname) to the 3 by copying them into a NFS-mounted folder shared with the 3. This is configured in `/etc/fstab`.
 
 The Zeros run `camera_module_listen.py` on startup, which listens on a multicast group and takes a photo into the NFS-connected `/home/pi/scans` folder, named with their hostname, every time the "capture" command is received. Copying the photo is delayed by N seconds (where N is the numeric ID of the scanner module, e.g. 1-35) in an attempt to reduce network traffic directly after taking the photo. This seems to work but could be replaced with a more optimal solution in the future, for example the 3 requesting images from the scanner modules one by one.
-
-
 
 ## Common tasks
 
@@ -88,6 +81,15 @@ To shutdown the Scanner run this command on the 3 and then shutdown itself:
 ```bash
 ansible scanners -a "shutdown" -u pi --become -f 10 
 ```
+
+### Mit Dd unter Linux RasPi-Image sichern
+
+    $ sudo dd if=/dev/sdd of=~/raspberry-pi.img
+
+### Mit Dd unter Linux RasPi-Image wiederherstellen
+
+    $ sudo dd if=~/raspberry-pi.img of=/dev/sdd
+    $ sync
 
 
 ## Known Issues
