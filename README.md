@@ -1,15 +1,24 @@
 # Luaga 3D Scanner
 
-This project contains the software necessary for both the controlling pi
-and the scanning pis.
+This project contains the software necessary for both the controlling pi (a Raspberry 3)
+and the scanning pis (Raspberry Zeros).
 
-## Undocumented:
+## Undocumented: 
 Which Python Version is used?
     Something like Python 3 I guess
 
 Which file is doing what and why?
 
 Where are the files loacted and is there location in the $PATH variable?
+
+Where? On the 3 there is a config file for dhcp where all mac addresses and there associated IP-Adresses are listed.
+
+On the 3 there is dnsmasq as a dhcp-server running ?? 
+On the 3 there is a file /etc/network/interfaces where e.g. the broadcast Address defined.
+
+The scanner.sh is a Bashscript by Noah. It allows to check the connections of the Zeros to the Pi3, to scan and to shutdown the Zeros and the Pi3. Contr+C to stop this Program is disabled. 
+
+
 
 ## Hardware+Software Setup
 
@@ -70,3 +79,5 @@ Sometimes raspistill seems to not be able to take a picture. Reason unknown, deb
 ### Weird image problems
 
 Occasionally, blocks of pixels in some images seem to get mixed up and the images come out weird.
+
+### 
