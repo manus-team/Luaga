@@ -49,6 +49,11 @@ if __name__ == '__main__':
             if subprocess.call(camera_options) == 0:
                 
                 print("Saved image to", temp_filename)
+                
+                delay = int(socket.gethostname()[-2:])
+                print("Waiting %s seconds before trying to transfer file" % delay)
+                time.sleep(delay)
+                
                 while True:
                     try:
                         shutil.copy(temp_filename, DESTINATION_PATH)
@@ -56,7 +61,7 @@ if __name__ == '__main__':
                         break
                     except:
                         print("Unexpected error:", sys.exc_info()[0])
-                        print("Copying failed, trying again ...")
+                        print("Copying failed, waiting 0.5s and trying again…")
                         time.sleep(0.5)
             else:
                 while True:
@@ -66,5 +71,5 @@ if __name__ == '__main__':
                         break
                     except :
                         print("Unexpected error:", sys.exc_info()[0])
-                        print("touching failed, trying again ...")
+                        print("touching failed, trying again…")
                         time.sleep(0.5)
