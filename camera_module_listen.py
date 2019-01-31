@@ -16,6 +16,8 @@ DESTINATION_PATH = '/home/pi/scans/'
 TEMP_PATH = '/home/pi/'
 
 if __name__ == '__main__':
+    print("Starting luaga camera module listener.")
+    print("Opening multicast listening socket.")
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind(('', MCAST_PORT))  # use MCAST_GRP instead of '' to listen only to MCAST_GRP, not all groups on MCAST_PORT
@@ -25,6 +27,7 @@ if __name__ == '__main__':
 
     while True:
         command = sock.recv(1024)
+        print("Received multicast command: %s" % command.encode('utf-8'))
         if command == b'capture':
             print("Capturing image")
 
