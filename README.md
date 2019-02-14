@@ -84,11 +84,11 @@ ansible scanners -a "shutdown" -u pi --become -f 10
 
 ### Mit Dd unter Linux RasPi-Image sichern
 
-    $ sudo dd if=/dev/sdd of=~/raspberry-pi.img
+    $ sudo dd if=/dev/<SD-Karte> of=/home/manu/raspberry-pi.img
 
 ### Mit Dd unter Linux RasPi-Image wiederherstellen
 
-    $ sudo dd if=~/raspberry-pi.img of=/dev/sdd
+    $ sudo dd if=/home/manu/raspberry-pi.img of=/dev/<SD-Karte>
     $ sync
 
 
