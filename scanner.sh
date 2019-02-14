@@ -12,70 +12,81 @@ GRN='\033[1;49;32m'
 # Step #2: User defined function
 # ----------------------------------
 pause(){
-        echo -e "${GRN}Press [Enter] key to continue...${STD}"
-        read -p ""
+	echo -e "${GRN}Press [Enter] key to continue...${STD}"
+	read -p ""
 }
 
 # check if scanners are started and luaga_listen is running on them
 luaga_listen(){
-        ansible scanners -m systemd -a "name=luaga-listen state=started" -u pi --become -f 10 > ansible_log
-        cat ansible_log | sed ':again;$!N;$!b again; :b; s/{[^{}]*}//g; t b' | sed s/'10.1.0.2'/''/ | sed s/'\s=>'/''/ | sort
+	ansible scanners -m systemd -a "name=luaga-listen state=started" -u pi --become > ansible_log
+	cat ansible_log | sed ':again;$!N;$!b again; :b; s/{[^{}]*}//g; t b' | sed s/'10.1.0.2'/''/ | sed s/'\s=>'/''/ | sort
         pause
 }
  
 # send command to make picture
 cheese(){
-        python send_multicast_capture_command.py
-        watch -d -t -n 1 'ls -la /home/pi/scans'
-        move_files
-        pause
+	python send_multicast_capture_command.py
+#	touch "Press CTRL+C to continue after all pictures have loaded"
+	watch -d -t -n 1 'ls -la /home/pi/scans'
+	move_files
+	pause
 }
 
 #push pics where they should go
 move_files(){
-        current_time=$(date "+%Y-%m-%d_%H-%M")
-        mkdir /home/pi/scans/finished/scan_$current_time
-        mv /home/pi/scans/*.jpg /home/pi/scans/finished/scan_"$current_time"
-        clear
-        amount=$(ls /home/pi/scans/finished/scan_"$current_time" | wc -l)
-        echo "Copied $amount pictures"
+	current_time=$(date "+%Y-%m-%d_%H-%M")
+	mkdir /home/pi/scans/finished/scan_$current_time
+	mv /home/pi/scans/*.jpg /home/pi/scans/finished/scan_"$current_time"
+	clear
+	amount=$(ls /home/pi/scans/finished/scan_"$current_time" | wc -l)
+	echo "Copied $amount pictures"
 }
 
 # Shutdown procedure
 shutdown(){
-        ansible scanners -a "shutdown" -u pi --become -f 10 > shutdown_log
-        cat shutdown_log | sed ':again;$!N;$!b again; :b; s/{[^{}]*}//g; t b' | sed s/'10.1.0.2'/''/ | sed s/'\s=>'/''/ | sort
-        echo -e "${RED}Press [Enter] to shutdown RaspiThree!${STD}"
-        read -p ""
-        sudo shutdown -Ph now
+	ansible scanners -a "shutdown -Ph now" -u pi --become -f 10 > shutdown_log
+	cat shutdown_log | sed ':again;$!N;$!b again; :b; s/{[^{}]*}//g; t b' | sed s/'10.1.0.2'/''/ | sed s/'\s=>'/''/ | sort
+ 	echo -e "${RED}Press [Enter] to shutdown RaspiThree!${STD}"
+        read -p ""	
+	sudo shutdown -Ph now
 } 
+
+#just reboot all zeros
+reboot_zeros(){
+	ansible scanners -a "reboot" -u pi --become -f 10 > reboot_log
+	cat shutdown_log | sed ':again;$!N;$!b again; :b; s/{[^{}]*}//g; t b' | sed s/'10.1.0.2'/''/ | sed s/'\s=>'/''/ | sort
+	pause
+}
 
 # function to display menus
 show_menus() {
-        clear
-        echo "~~~~~~~~~~~~~~~~~~~~~"
-        echo " M A I N - M E N U"
-        echo "~~~~~~~~~~~~~~~~~~~~~"
-        echo "1. Test Scanners"
-        echo "2. Make a picture"
-        echo "3. Shutdown"
-        echo "4. Exit program"
-        }
+	clear
+	echo "~~~~~~~~~~~~~~~~~~~~~"	
+	echo " M A I N - M E N U"
+	echo "~~~~~~~~~~~~~~~~~~~~~"
+	echo "1. Test Scanners"
+	echo "2. Make a picture"
+	echo "3. Shutdown everything"
+	echo "4. Reboot Zeros only"
+	echo "5. Exit programm"
+	}
+
 # read input from the keyboard and take a action
 # invoke luaga_listen when the user select 1 from the menu option.
 # invoke cheese when the user select 2 from the menu option.
 # invoke shutdown when the user select 3 from the menu option.
 # Exit when user the user select 4 form the menu option.
 read_options(){
-        local choice
-        read -p "Enter choice [ 1 - 4] " choice
-        case $choice in
-                1) luaga_listen ;;
-                2) cheese ;;
-                3) shutdown ;;
-                4) exit 0;;
-                *) echo -e "${RED}Error...${STD}" && sleep 2
-        esac
+	local choice
+	read -p "Enter choice [ 1 - 5] " choice
+	case $choice in
+		1) luaga_listen ;;
+		2) cheese ;;
+		3) shutdown ;;
+		4) reboot_zeros ;;
+		5) exit 0;;
+		*) echo -e "${RED}Error...${STD}" && sleep 2
+	esac
 }
  
 # ----------------------------------------------
@@ -89,6 +100,6 @@ trap '' SIGINT SIGQUIT SIGTSTP
 while true
 do
  
-        show_menus
-        read_options
+	show_menus
+	read_options
 done
